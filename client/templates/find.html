@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- set active nav link -->
+{% block find %} active {% endblock %}
+
+{% block content %}
+
+	<!-- banner -->
+	<div class="banner_w3lspvt-2">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'url_home' %}" class="font-weight-bold">Home</a></li>
+			<li class="breadcrumb-item" aria-current="page">Doadores</li>
+		</ol>
+	</div>
+	<!-- //banner -->
+
+	<!-- //main banner -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 mt-lg-0 mt-5">
+				<!-- contact form grid -->
+				<div class="contact-top1">
+					<form action="" class="contact-wthree-do" method="get">
+						{% csrf_token %}
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-4">
+									<label>
+										Grupo sanguíneo
+									</label>
+									<div>
+										<select id='id_group' class="form-control" style="height: 50px;" name="group">
+											<option value=""></option>
+											<option value="A+">A+</option>
+											<option value="AB+">AB+</option>
+											<option value="B+">B+</option>
+											<option value="O+">O+</option>
+											<option value="A-">A-</option>
+											<option value="AB-">AB-</option>
+											<option value="B-">B-</option>
+											<option value="O-">O-</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-4 mt-md-0 mt-2">
+									<label>
+										Provincia
+									</label>
+									<div>
+										<select id='id_province' class="form-control" style="height: 50px;" name="province">
+										</select>
+									</div>
+								</div>
+
+
+								<div class="col-md-4 mt-md-0 mt-2">
+									<label>
+										Municipio
+									</label>
+									<div>
+										<select id='id_municipe' class="form-control" style="height: 50px;" name="municipe">
+										</select>											
+									</div>
+								</div>
+
+							</div>
+							<div class="row mt-3">
+									<div class="col-12">
+										<button type="submit" class="btn btn-cont-w3 btn-block mt-1 mx-auto">Filtrar</button>
+									</div>
+								</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- price -->
+	<div class="price-sec py-2">
+		<div class="container py-xl-5 py-lg-3">
+			<div class="inner_sec_info_w3_info mt-3">
+				<div class="row price-grid-main infinite-container">
+
+						<!-- find -->
+						{% for i in data %}	
+							<div class="row m-auto infinite-item">
+									<div class="col-md-auto">
+									<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+										<div class="col p-4 d-flex flex-column position-static">
+											<strong class="d-inline-block mb-2 text-primary">{{ i.name }}</strong>
+											<h3 class="mb-0 text-right badge-secondary">{{ i.group }}</h3>
+											<div class="mb-1 text-dark">Provincia: {{ i.province }}</div>
+											<div class="mb-1 text-dark">Municipio: {{ i.municipe }}</div>
+											<a href="#" class=" stretched-link">{{ i.phone }}</a>
+											<p style="opacity:0" class="card-text mb-0">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+										</div>
+									</div>
+									</div>
+							</div>
+						{% endfor %}
+				</div>
+				
+				<div class="row">
+					<div class="col-6">
+						{% if page_obj.has_previous %}
+							<a class="btn btn-md alert-info float-left infinite-more-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+						{% endif %}
+						</span>
+					</div>
+
+					<div class="col-6">
+						{% if page_obj.has_next %}
+							<a class="btn btn-md alert-info float-right infinite-more-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+						{% endif %}
+						</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- //find -->
+
+	<script>
+		t = $('#id_province');
+		var jdata;	
+
+		$(document).ready(function(){
+			
+			$.ajax({
+				url: '../static/provincias-cidades.json',
+				dataType: 'json',
+				type: 'get',
+				cache: false,
+				success: function(data){
+					jdata = data;
+					$('#id_province').empty();
+					$('#id_province').append('<option value=""></option>');
+					jdata.forEach(function(i, e){
+						$('#id_province').append('<option value="'+i.name+'">'+i.name+'</option>');
+					}
+					);
+
+					jdata.forEach(function(i, e){
+						if(i.name === t.val()){
+							$('#id_municipe').empty()
+							$('#id_municipe').append('<option value=""></option>');
+							i.cities.forEach(function(i){
+								$('#id_municipe').append('<option value="'+i+'">'+i+'</option>');
+					})}}
+					)
+				}
+			});
+			$('#id_province').change(function(){
+				if(t.val() === ""){
+					$('#id_municipe').empty()
+				}
+				jdata.forEach(function(i, e){
+					if(i.name === t.val()){
+						$('#id_municipe').empty()
+						$('#id_municipe').append('<option value=""></option>');
+						i.cities.forEach(function(i){
+							$('#id_municipe').append('<option value="'+i+'">'+i+'</option>');
+				})}}
+				)
+			});
+		});
+	</script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- set active nav link -->
+{% block home %} active {% endblock %}
+
+{% block content %}
+<!-- banner -->
+<div class="banner_w3lspvt position-relative">
+	<div class="container">
+		<div class="d-md-flex">
+			<div class="w3ls_banner_txt">
+				<h3 class="w3ls_pvt-title">Doe sangue<br><span>Salve vidas!</span></h3>
+				<p class="text-sty-banner">Com um simples ato, você pode ser a esperança para muitos. Um super-herói nem sempre usa capa. Às vezes, Ele apenas doa sangue!</p>
+				<a href="{% url 'url_about' %}" class="btn button-style mt-md-5 mt-4">Saiba mais</a>
+			</div>
+			<div class="banner-img">
+				<img src="{% static 'images/baner.png'%} " alt="" class="img-fluid">
+			</div>
+		</div>
+	</div>
+	<!-- animations effects -->
+	<div class="icon-effects-w3l">
+		<img src="{% static 'images/shape1.png' %}" alt="" class="img-fluid shape-wthree shape-w3-one">
+		<img src="{% static 'images/shape2.png' %}" alt="" class="img-fluid shape-wthree shape-w3-two">
+		<img src="{% static 'images/shape3.png' %}" alt="" class="img-fluid shape-wthree shape-w3-three">
+		<img src="{% static 'images/shape5.png' %}" alt="" class="img-fluid shape-wthree shape-w3-four">
+		<img src="{% static 'images/shape4.png' %}" alt="" class="img-fluid shape-wthree shape-w3-five">
+		<img src="{% static 'images/shape6.png' %}" alt="" class="img-fluid shape-wthree shape-w3-six">
+	</div>
+	<!-- //animations effects -->
+</div>
+<!-- //banner -->
+</div>
+<!-- //main banner -->
+
+<!-- stats -->
+<section class="bottom-count py-5" id="stats">
+<div class="container py-xl-5 py-lg-3">
+	<div class="row">
+		<div class="col-lg-5 left-img-w3ls">
+			<img src="{% static 'images/b2.jpg' %}" alt="" class="img-fluid" />
+		</div>
+		<div class="col-lg-7 right-img-w3ls pl-lg-4 mt-lg-2 mt-4">
+			<div class="bott-w3ls mr-xl-5">
+				<h3 class="title-w3 text-bl mb-3 font-weight-bold">Factos sobre a realidade em Angola!</h3>
+				<p class="title-sub-2 mb-3">Apenas 0,5% da população angolana doou sangue em 2020</p>
+				<p>O Instituto Nacional de Sangue (INS) colheu, em 2020, cerca de 110 mil e 231 bolsas de sangue, resultantes da doação de 175 mil doadores.</p>
+			</div>
+			<div class="row mt-5">
+				<div class="col-sm-4 count-w3ls">
+					<h4>899+</h4>
+					<p>Foram descartadas</p>
+				</div>
+				<div class="col-sm-4 count-w3ls mt-sm-0 mt-3">
+					<h4>143-</h4>
+					<p>Em relação à média anual</p>
+				</div>
+				<div class="col-sm-4 count-w3ls mt-sm-0 mt-3">
+					<h4>127 mil+</h4>
+					<p>Por familiares</p>
+				</div>
+			</div>
+			<div class="row mt-sm-5 mt-4 esconde">
+				<div class="col-sm-4 count-w3ls">
+					<h4>480+</h4>
+					<p>Consultant</p>
+				</div>
+				<div class="col-sm-4 count-w3ls mt-sm-0 mt-3">
+					<h4>600+</h4>
+					<p>Award Winning</p>
+				</div>
+				<div class="col-sm-4 count-w3ls mt-sm-0 mt-3">
+					<h4>1000+</h4>
+					<p>Project completed</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+{% endblock content %}
+		
+
+	
+	

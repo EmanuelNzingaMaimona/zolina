@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- set active nav link -->
+{% block perfil %} active {% endblock %}
+
+{% block content %}
+		<!-- banner -->
+		<div class="banner_w3lspvt-2">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-i.name"><a href="{% url 'url_home' %}" class="font-weight-bold">Home</a></li>
+				<li class="breadcrumb-i.name ml-1" aria-current="page">Perfil</li>
+			</ol>
+		</div>
+		<!-- //banner -->
+	</div>
+	<!-- //main banner -->
+
+	<span class="esconde" id="demail">{{email}}</span>
+	<span class="esconde" id="dmunicipe">{{municipe}}</span>
+
+	
+	<!-- contact -->
+	<div class="contact py-5" id="contact">
+		<div class="container pb-xl-5 pb-lg-3">
+			<div class="row">
+				<div class="col-lg-6">
+						<img src="{{ request.user.donor.picture.url }}" alt="image" style="max-height: 200px; max-width: 250px; border-radius: 50%; margin: 0 auto;" class="mb-5 img-fluid" />
+					
+				</div>
+				<div class="col-lg-6 mt-lg-0 mt-5">
+					<!-- contact form grid -->
+					<div class="contact-top1">
+						<form action="" class="contact-wthree-do" method="POST" enctype="multipart/form-data">
+							{% csrf_token %}
+							
+							{{form.picture}}
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-12">
+										<label>
+											Nome
+										</label>
+										{{ form.name }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label>
+											Telefone
+										</label>
+										{{ form.phone }}
+									</div>
+									<div class="col-md-6 mt-md-0 mt-4">
+										<label>
+											Email
+										</label>
+										{{ user.email }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label>
+											Grupo sanguíneo
+										</label>
+										<div>
+											{{ form.group }}
+										</div>
+									</div>
+									<div class="col-md-6 mt-md-0 mt-4">
+										<label>
+											Morada
+										</label>
+										{{ form.district }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label>
+											Provincia
+										</label>
+										<div>
+											{{form.province}}
+										</div>
+									</div>
+									<div class="col-md-6 mt-md-0 mt-4">
+										<label>
+											Municipio
+										</label>
+										<div class="aqui">
+											<select id='id_municipe' class="form-control" style="height: 50px;" name="municipe">
+											</select>											
+										</div>
+									</div>
+								</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6 mt-3">
+										<label>
+											Login
+										</label>
+										{{ user.username }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label>
+											Senha
+										</label>
+										{{ user.password1 }}
+									</div>
+									<div class="col-md-6 mt-md-0 mt-4">
+										<label>
+											Repita a senha
+										</label>
+										{{ user.password2 }}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group esconde">
+								<div class="row">
+									<div class="col-md-12">
+										<label>
+											Sua messagem
+										</label>
+										<textarea placeholder="Adiciona aqui a sua mensagem (opcional)" name="message" class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-cont-w3 btn-block mt-4">Actualizar</button>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-12">
+										<label id="message">{{ form.errors }} </label>									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- //contact form grid ends here -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //contact-->
+
+	
+
+	<script>
+		t = $('#id_province');
+		var jdata;
+
+		$('#message li').attr({
+			style: 'list-style: none',
+			class: 'alert alert-info'
+		})
+
+		$(document).ready(function(){
+			$('#id_province, #id_municipe, #id_group').attr({
+				class:'form-control',
+				style: 'height: 50px'
+			});
+
+			$('#id_email').attr('value', $('#demail').html())
+
+			$.ajax({
+				url: '../static/provincias-cidades.json',
+				dataType: 'json',
+				type: 'get',
+				cache: false,
+				success: function(data){
+					jdata = data;
+
+					/*$('#id_province').empty();
+					jdata.forEach(function(i, e){
+						$('#id_province').append('<option value="'+i.name+'">'+i.name+'</option>');
+					}
+					);*/
+
+					jdata.forEach(function(i, e){
+						if(i.name === t.val()){
+							$('#id_municipe').empty()
+							i.cities.forEach(function(i){
+								$('#id_municipe').append('<option value="'+i+'">'+i+'</option>');
+							})
+						}}
+					)
+					$('#id_municipe').val($('#dmunicipe').html())
+					$('.esconde').remove()
+				}
+			});
+			$('#id_province').change(function(){
+				jdata.forEach(function(i, e){
+					if(i.name === t.val()){
+						$('#id_municipe').empty()
+						i.cities.forEach(function(i){
+							$('#id_municipe').append('<option value="'+i+'">'+i+'</option>');
+				})}}
+				)
+			});
+		});
+	</script>
+
+{% endblock %}

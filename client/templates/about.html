@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- set active nav link -->
+{% block about %} active {% endblock %}
+
+{% block content %}
+		<!-- banner -->
+		<div class="banner_w3lspvt-2">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html" class="font-weight-bold">Home</a></li>
+				<li class="breadcrumb-item" aria-current="page">Sobre</li>
+			</ol>
+		</div>
+		<!-- //banner -->
+	</div>
+	<!-- //main banner -->
+
+	<!-- about -->
+	<div class="about-inner py-5">
+		<div class="container pb-xl-5 pb-lg-3">
+			<div class="row py-xl-4">
+				<div class="col-lg-5 about-right-faq pr-5">
+					<h6>Sobre nós</h6>
+					<h3 class="mt-2 mb-3">Benvindo ao nosso Website</h3>
+					<p class="mt-2">O objectivo do mesmo, é reduzir as chances de morte por escasses de sangue em unidades hospitalares, bem como fazer lembra-lo que a solidariedade está nas nossas veias.</p>
+					<p class="mt-2">Você é o tipo certo de alguém. Cadastre-se hoje e junta-se a uma causa maior. Uma vez cadastrado você será sempre contactado em caso de uma necessidade de doação</p>
+					<p class="mt-2">Os critérios para a doação passa pela idade que é dos 18 aos 60 anos, com um peso de 50 quilos ou mais, possuir de boa saúde, ou seja, não pertencer a nenhum grupo de risco, bem como descansar sete horas antes de fazer a doação, evitar a ingestão de álcool e alimentos com gordura.</p>
+					<p class="mt-2">Os homens podem fazer doação de sangue a cada 60 dias, com máximo de 4 doações a cada 12 meses.</p>
+					<p class="mt-2">As mulheres devem esperar 90 dias entre uma doação e outra, com máximo de 3 doações no período de 12 meses.</p>
+					<a href="about.html" class="btn button-style mt-sm-5 mt-4 esconde">Read More</a>
+				</div>
+				<div class="col-lg-7 welcome-right text-center mt-lg-0 mt-5">
+					<img src="{% static 'images/q1.png' %}" alt="" class="img-fluid" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //about -->
+
+	<!-- why -->
+	<section class="why bg-li py-5 esconde" id="why">
+		<div class="container py-xl-5 py-3">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="ser-grd">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr5">
+								<span class="fa fa-handshake-o"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+					<div class="ser-grd mt-md-5 mt-4">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr6">
+								<span class="fa fa-coffee"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="ser-grd mt-md-0 mt-4">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr1">
+								<span class="fa fa-headphones"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+					<div class="ser-grd mt-md-5 mt-4">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr2">
+								<span class="fa fa fa-eye"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="ser-grd mt-md-0 mt-4">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr3">
+								<span class="fa fa-folder-open"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+					<div class="ser-grd mt-md-5 mt-4">
+						<div class="row">
+							<div class="col-md-3 col-2 text-center services-icon icon-clr4">
+								<span class="fa fa-lightbulb-o"></span>
+							</div>
+							<div class="col-md-9 col-10 text-left services-grid">
+								<h4>Title Here</h4>
+								<p>Natus error sit voluptatem accusantium dolo remque lauda ntium.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- //services -->
+
+	{% endblock%}

@@ -1,0 +1,10 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit">Save changes</button>
+    <span class="alert alert-danger">
+        {{ user_form.errors}}
+        {{ profile_form.errors}}
+    </span>
+  </form>
