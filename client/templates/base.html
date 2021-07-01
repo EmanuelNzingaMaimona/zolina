@@ -25,6 +25,7 @@ E-mail: emanuelmaimona.com
 		}
 	</script>
 	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/sweetalert.min.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 
 	<!-- //Meta tag Keywords -->
@@ -32,7 +33,7 @@ E-mail: emanuelmaimona.com
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+	
 	<!-- Bootstrap-Core-CSS -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
 	<!-- Style-CSS -->
@@ -47,6 +48,7 @@ E-mail: emanuelmaimona.com
 </head>
 
 <body>
+	
 	<!-- main banner -->
 	<div class="main-top" id="home">
 		<!-- header -->
@@ -68,8 +70,11 @@ E-mail: emanuelmaimona.com
 								<li><a href="{% url 'url_find' %}" class="{% block find %} {% endblock %}" >Encontrar Doador</a></li>
 								<li><a href="{% url 'url_about' %}" class="{% block about %} {% endblock %}" >Sobre</a></li>
 								{% if user.is_authenticated %}
-									<li><a href="{% url 'url_perfil' request.user %}" class="{% block perfil %} {% endblock %}">Perfil</a></li>
+									<li><a href="{% url 'url_perfil' request.user %}" class="">Perfil</a></li>
 									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao {{ user.username }}</a></li>
+								{% elif i.is_authenticated %}
+									<li><a href="{% url 'url_perfil' request.user %}" class="{% block perfil %} {% endblock %}">Perfil</a></li>
+									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao {{ i.username }}</a></li>
 								{% else %}
 									<li><a href="{% url 'url_login' %}" class="text-info">Iniciar sessao</a></li>
 								{% endif %}
@@ -102,7 +107,7 @@ E-mail: emanuelmaimona.com
             <form action="#" method="post" class="subscribe-wthree pt-2">
                 <div class="d-flex subscribe-wthree-field">
                     <input class="form-control" type="hidden" placeholder="Enter your email..." name="email" required="">
-                    <a class="btn mybtn m-auto " href="{% url 'url_regist' %}" >Cadastrar-se</a> <!-- //The pattern was w-50 and was a button-->
+                    <a id='cadastrar' class="btn mybtn m-auto " href="{% url 'url_regist' %}" >Cadastrar-se</a> <!-- //The pattern was w-50 and was a button-->
                 </div>
             </form>
         </div>
@@ -159,7 +164,39 @@ E-mail: emanuelmaimona.com
 <!-- //copyright bottom -->
 
 
+<script>
+	$(function(){
+		$('#cadastrar').click(function(e){
+			swal('uyfyfyu')
+			// Do something before following the link 
+			swal({
+				title: "Are you sure?",
+				text: "Once deleted, you will not be able to recover this imaginary file!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			  })
+			  .then((willDelete) => {
+				if (willDelete) {
+				  swal("Poof! Your imaginary file has been deleted!", {
+					icon: "success",
+				  });
+				} else {
+				  swal("Your imaginary file is safe!");
+				}
+			  });
+			 
+			 // Get url from the target element (<a>) href attribute
+			var url = event.target.href;
 
+			// Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
+			window.open(url, '_self');
+
+			// Prevent default action (e.g. following the link)
+			event.preventDefault(); 
+		})
+	})
+</script>
 </body>
 
 </html>

@@ -60,19 +60,8 @@ class DonorForm(forms.ModelForm):
         'placeholder': 'alterar foto', 'class':'form-control', 'name':'picture'
     }))
 
-    username = forms.CharField(required=True, widget=forms.TextInput(attrs={
-        'placeholder': 'ex.: vemba', 'class':'form-control', 'name':'username'
-    }))
-
-    password1 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={
-        'placeholder': '6 ou mais digitos', 'class':'form-control', 'name':'password1', 'minlength':3
-    }))
-
-    password2 = forms.CharField(required=True, widget=forms.PasswordInput(attrs={
-        'placeholder': '6 ou mais digitos', 'class':'form-control', 'name':'password2', 'minlength':3
-    }))
 
     class Meta:
         model = Donor
-        fields = ('name', 'phone', 'email', 'group', 'province', 'municipe', 'district', 'picture', 'username', 'password1', 'password2')
+        fields = ('name', 'phone', 'email', 'group', 'province', 'municipe', 'district', 'picture')
 

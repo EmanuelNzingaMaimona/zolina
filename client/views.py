@@ -95,9 +95,10 @@ def login_user(request):
                 )
             if user is not None:
                 login(request, user)
+                messages.info(request, 'success')
                 return redirect('url_home') 
             else:
-                messages.info(request, 'user or pass wrong')
+                messages.info(request, 'error')
     return render(request, 'login.html')
 
 def logout_user(request):
@@ -108,6 +109,38 @@ def logout_user(request):
 def perfil(request, pk):
     if not request.user.is_authenticated:
         return redirect('url_login')
+    
+    insta = Donor.objects.get(user=User.objects.get(username=pk))
+    user = request.user
+    userform = CreateUserForm(instance=user)
+    donorform = DonorForm(instance=insta)
+    if request.method == "POST":
+        userform = CreateUserForm(request.POST or None, instance=user)
+        donorform = DonorForm(request.POST or None, request.FILES or None, instance=insta)
+        if donorform.is_valid:
+            donorform.save()
+            pk=request.POST.get('username')
+            messages.success(request, 'Sucessfully updated')
+        else:
+            messages.error(request, 'sth went wrong')
+    
+    content = {
+        'i': user,
+        'user': userform, 
+        'form': donorform,
+        'email': User.objects.get(username=pk).email,
+        'municipe': insta.municipe,
+        }
+
+    return render(request, 'perfil.html', content)
+
+
+
+
+def nova_senha(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('url_login')
+    
     insta = Donor.objects.get(user=User.objects.get(username=pk))
     user = request.user
     userform = CreateUserForm(instance=user)
@@ -124,6 +157,7 @@ def perfil(request, pk):
             messages.error(request, 'sth went wrong')
     
     content = {
+        'i': user,
         'user': userform, 
         'form': donorform,
         'email': User.objects.get(username=pk).email,
@@ -131,8 +165,6 @@ def perfil(request, pk):
         }
 
     return render(request, 'perfil.html', content)
-
-
 
 
 

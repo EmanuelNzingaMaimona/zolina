@@ -1,3 +1,5 @@
+<a href="{% url 'url_perfil' request.user %}" class="{% block perfil %} {% endblock %}">Perfil</a>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
