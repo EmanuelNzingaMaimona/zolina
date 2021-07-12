@@ -27,9 +27,12 @@
 	<div class="contact py-5" id="contact">
 		<div class="container pb-xl-5 pb-lg-3">
 			<div class="row">
-				<div class="col-lg-6">
-						<img src="{{ request.user.donor.picture.url }}" alt="image" style="max-height: 200px; max-width: 250px; border-radius: 50%; margin: 0 auto;" class="mb-5 img-fluid" />
-					
+				<div class="col-lg-6 text-center">
+						{% if request.user.donor.picture.url != none %}
+							<img src="{{ request.user.donor.picture.url }}" alt="image" class="mb-5 img-fluid" style="height: 200px; width: 200px; max-height: 200px; max-width: 250px; border-radius: 50%; margin: 0 auto; border: 5px inset #705ecf;"/>
+						{% else %}
+							<img src="{% static 'find_user.png' %}" alt="image" style="height: 200px; width: 200px; max-height: 200px; max-width: 250px; border-radius: 50%; margin: 0 auto; border: 5px inset #705ecf;" class="mb-5 img-fluid" />
+						{% endif %}					
 				</div>
 				<div class="col-lg-6 mt-lg-0 mt-5">
 					<!-- contact form grid -->
@@ -37,7 +40,7 @@
 						<form action="" class="contact-wthree-do" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
 							
-							{{form.picture}}
+							{{ form.picture }}
 
 							<div class="form-group">
 								<div class="row">
@@ -61,7 +64,7 @@
 										<label>
 											Email
 										</label>
-										{{ user.email }}
+										{{ form.email }}
 									</div>
 								</div>
 							</div>
@@ -130,25 +133,21 @@
 								</div>
 							</div>
 
-							<div class="form-group esconde">
-								<div class="row">
+							<div class="form-group">
+								<div class="row mt-3">
+									<div class="col-md-9">
+										<button type="submit" class="btn btn-cont-w3 btn-block mt-4">Actualizar</button>
+									</div>
+									<div class="col-md-3">
+										<a type="submit" class="btn btn-outline-success btn-md-sm-block mt-4 w-100" href="{% url 'url_password' %}">Mudar senha</a>
+									</div>
+								</div>
+								<div class="row mt-3">
 									<div class="col-md-12">
-										<label>
-											Sua messagem
-										</label>
-										<textarea placeholder="Adiciona aqui a sua mensagem (opcional)" name="message" class="form-control"></textarea>
+										<label id="message">{{ form.errors }} </label>									
 									</div>
 								</div>
 							</div>
-							<div class="row mt-3">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-cont-w3 btn-block mt-4">Actualizar</button>
-								</div>
-							</div>
-							<div class="row mt-3">
-								<div class="col-md-12">
-										<label id="message">{{ form.errors }} </label>									</div>
-								</div>
 							</div>
 						</form>
 					</div>
@@ -175,8 +174,6 @@
 				class:'form-control',
 				style: 'height: 50px'
 			});
-
-			$('#id_email').attr('value', $('#demail').html())
 
 			$.ajax({
 				url: '../static/provincias-cidades.json',

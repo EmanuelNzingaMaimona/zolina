@@ -72,6 +72,18 @@
 	</div>
 </div>
 </section>
+
+<script type="text/javascript">
+	var v = 0;
+	if($('span.user').text() && v == 0){
+		swal({
+		title: "Login aceite!" + v,
+		icon: "success",
+		});
+		$('#messages').text("")
+		v++;
+	}
+</script>
 {% endblock content %}
 		
 

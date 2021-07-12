@@ -26,7 +26,6 @@ E-mail: emanuelmaimona.com
 	</script>
 	<script src="{% static 'js/jquery.js' %}"></script>
 	<script src="{% static 'js/sweetalert.min.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 
 	<!-- //Meta tag Keywords -->
 	<!-- Custom-Files -->
@@ -37,8 +36,9 @@ E-mail: emanuelmaimona.com
 	<!-- Bootstrap-Core-CSS -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
 	<!-- Style-CSS -->
-	<link href="{% static 'css/font-awesome.min.css' %} " rel="stylesheet">
 	<!-- Font-Awesome-Icons-CSS -->
+	<link href="{% static 'css/font-awesome.min.css' %} " rel="stylesheet">
+
 	<!-- //Custom-Files -->
 
 	<!-- Web-Fonts -->
@@ -57,7 +57,7 @@ E-mail: emanuelmaimona.com
 				<div class="header d-lg-flex justify-content-between align-items-center py-3 px-sm-3">
 					<!-- logo -->
 					<div id="logo">
-						<h1><a href="{% url 'url_home' %}"><span class="fa fa-linode mr-2"></span>HemoAngola</a></h1>
+						<h1><a href="{% url 'url_home' %}"><span class="fa fa-heartbeat mr-2"></span>HemoAngola</a></h1>
 					</div>
 					<!-- //logo -->
 					<!-- nav -->
@@ -70,11 +70,11 @@ E-mail: emanuelmaimona.com
 								<li><a href="{% url 'url_find' %}" class="{% block find %} {% endblock %}" >Encontrar Doador</a></li>
 								<li><a href="{% url 'url_about' %}" class="{% block about %} {% endblock %}" >Sobre</a></li>
 								{% if user.is_authenticated %}
-									<li><a href="{% url 'url_perfil' request.user %}" class="">Perfil</a></li>
-									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao {{ user.username }}</a></li>
+									<li><a href="{% url 'url_perfil' %}" class="">Perfil</a></li>
+									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao <span class="user">{{ user.username }}</span></a></li>
 								{% elif i.is_authenticated %}
-									<li><a href="{% url 'url_perfil' request.user %}" class="{% block perfil %} {% endblock %}">Perfil</a></li>
-									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao {{ i.username }}</a></li>
+									<li><a href="{% url 'url_perfil' %}" class="{% block perfil %} {% endblock %}">Perfil</a></li>
+									<li><a href="{% url 'url_logout' %}" class="">Terminar sessao <span class="user">{{ i.username }}</span></a></li>
 								{% else %}
 									<li><a href="{% url 'url_login' %}" class="text-info">Iniciar sessao</a></li>
 								{% endif %}
@@ -107,7 +107,7 @@ E-mail: emanuelmaimona.com
             <form action="#" method="post" class="subscribe-wthree pt-2">
                 <div class="d-flex subscribe-wthree-field">
                     <input class="form-control" type="hidden" placeholder="Enter your email..." name="email" required="">
-                    <a id='cadastrar' class="btn mybtn m-auto " href="{% url 'url_regist' %}" >Cadastrar-se</a> <!-- //The pattern was w-50 and was a button-->
+                    <a id='cadastrar' class="btn mybtn m-auto">Cadastrar-se</a> <!-- //The pattern was w-50 and was a button-->
                 </div>
             </form>
         </div>
@@ -167,37 +167,38 @@ E-mail: emanuelmaimona.com
 <script>
 	$(function(){
 		$('#cadastrar').click(function(e){
-			swal('uyfyfyu')
+			if($('span.user').text()){
 			// Do something before following the link 
-			swal({
-				title: "Are you sure?",
-				text: "Once deleted, you will not be able to recover this imaginary file!",
-				icon: "warning",
-				buttons: true,
-				dangerMode: true,
-			  })
-			  .then((willDelete) => {
-				if (willDelete) {
-				  swal("Poof! Your imaginary file has been deleted!", {
-					icon: "success",
-				  });
-				} else {
-				  swal("Your imaginary file is safe!");
-				}
-			  });
-			 
-			 // Get url from the target element (<a>) href attribute
-			var url = event.target.href;
+				swal({
+					title: "Deseja terminar a sua sessão?",
+					text: "Para efectuar um novo cadastro, a sua sessão deverá ser terminada!",
+					icon: "warning",
+					buttons: true,
+					dangerMode: false,
+				})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.open("{% url 'url_regist' %}", '_self');
+					} 
+				});
 
-			// Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
-			window.open(url, '_self');
+				/*
+				// Get url from the target element (<a>) href attribute
+				var url = event.target.href;
 
-			// Prevent default action (e.g. following the link)
-			event.preventDefault(); 
-		})
+				// Open the url in the current window. Set to "_blank" instead of "_self" to open in a new window.
+				window.open(url, '_self');
+
+				// Prevent default action (e.g. following the link)
+				event.preventDefault(); */
+			} else{
+				window.open("{% url 'url_regist' %}", '_self');
+			}
+			})
 	})
 </script>
-</body>
 
+
+</body>
 </html>
 {% endblock %}

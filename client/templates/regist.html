@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom %}
+{% load i18n %}
 
 <!-- set active nav link -->
 {% block regist %} active {% endblock %}
@@ -146,9 +148,10 @@
 							</div>
 							<div class="row mt-3">
 								<div class="col-md-12">
-										<label id="message">{{ form.errors }} </label>									</div>
+									<label id="message" onchange="filter()">{{ form.errors}} </label>									</div>
 								</div>
 							</div>
+							
 						</form>
 					</div>
 					<!-- //contact form grid ends here -->
@@ -165,6 +168,20 @@
 	<!-- //map -->
 
 	<script>
+		$(function(){
+			if($("ul.errorlist li[value='username']")){
+				$("ul.errorlist li[value='username']").val('kkk')
+			}
+
+			$('#e').click(function(){
+				alert
+				$("ul.errorlist li[value='username']").val('kkk')
+			})
+
+
+		})
+		
+
 		t = $('#id_province');
 		var jdata;
 

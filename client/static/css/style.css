@@ -165,8 +165,8 @@ nav {
     float: left;
     display: initial;
     font-size: 32px;
-    color: #705ecf;
-    text-shadow: 2px 5px 3px rgba(0, 0, 0, 0.06);
+    color: #ffffff;
+    text-shadow: 2px 1px 8px rgba(7,7, 7,1);
     padding: 0;
     font-weight: 600;
 }
@@ -1238,6 +1238,14 @@ button.btn-cont-w3 {
 /* //contact page */
 
 /* responsive */
+
+@media (max-width: 575.98px) 
+{
+    .security{
+        width: 85% !important;
+    }
+}
+
 @media(max-width: 1366px) {
     h3.w3ls_pvt-title {
         font-size: 3.5rem;

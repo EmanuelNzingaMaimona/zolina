@@ -1,4 +1,5 @@
 {% load static %}
+
 <!--
 Autor: Emanuel Nzinga Maimona
 E-mail: emanuelmaimona.com
@@ -20,12 +21,18 @@ E-mail: emanuelmaimona.com
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
-	<!-- Style-CSS -->
-	  <link href="{% static 'css/font-awesome.min.css' %} " rel="stylesheet">
+	    <!-- Style-CSS -->
+    
+    <!-- Font-Awesome-Icons-CSS -->
+    <link href="{% static 'css/font-awesome.min.css' %} " rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <style>
+      #logo a{
+        margin-bottom: 35px;
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -40,6 +47,18 @@ E-mail: emanuelmaimona.com
           font-size: 3.5rem;
         }
       }
+
+      @media (min-width: 320px){
+        #logo a{
+          font-size: 3rem;
+        }
+      }
+
+      @media (max-width: 320px){
+        #logo a{
+          font-size: 1em;
+        }
+      }
     </style>
 
     <!-- Custom styles for this template -->
@@ -49,47 +68,60 @@ E-mail: emanuelmaimona.com
   <body class="text-center">
     <form class="form-signin" method="POST">
         {% csrf_token %}
-        <h1 class="h3 mb-3 font-weight-norma display-4 text-secondary">HemoAngola</h1>
-        <h1 class="h3 mb-3 font-weight-normal">Seja bem vindo!</h1>
+        <div id="logo" class="py-5">
+            <h1><a href="#" ><span class="fa fa-heartbeat mr-2"></span>HemoAngola</a></h1>
+				</div>
+       
         <label for="inputText" class="sr-only">Nome de usuario</label>
         <div class="input-group">
             <div class="input-group-prepend">
-                <div class="input-group-text">@</div>
+              <div class="input-group-text"> 
+                <span class="fa fa-user"></span> 
+              </div>
             </div>
-        <input type="text" id="inputText" class="form-control" name="username" placeholder="" required autofocus>
+        <input type="text" id="inputText" class="form-control" name="username" placeholder="login" required autofocus>
         </div>  
         <label for="inputPassword" class="sr-only">Senha</label>
-        <span class="mt-1"></span>
-        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="senha" required>
-        
+
+        <div class="input-group" >
+            <div class="input-group-prepend" >
+              <div class="input-group-text" style="height: 46px; padding-right: 13px;"> 
+                <span class="fa fa-lock"></span> 
+              </div>
+            </div>
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="senha" required>
+        </div> 
+
         <a class="h5 esconde" href="{% url 'password_reset' %}" >Esqueci a senha</a>
 
-        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Entrar</button>
-        <a class="btn btn-lg alert-success btn-block" href="{% url 'url_regist' %}" >Cadastrar se</a>
+        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit" style="color: #FFF; background-color: rgba(0, 124, 164, 0.8); border-color: inherit; font-weight: bold;">Entrar</button>
+        <a class="btn btn-lg alert-success btn-block" href="{% url 'url_regist' %}" style="font-weight: 500;">Criar uma conta</a>
 
         {% for m in messages %}
           <p id="messages" class="esconde">{{m}}</p>
            <script type="text/javascript">
-            if($('#messages').text() === "error"){
+            if($('#messages').text() === "error_login"){
               swal({
                 title: "Erro!",
                 text: "Nome de usuário ou senha incorretos!",
                 icon: "error",
               });
               $('#messages').text("")
-            } else if($('#messages').text() === "success"){
+            } else if($('#messages').text() === "senha"){
               swal({
-                title: "Boas vindas!",
-                text: "Seja benvindo ao Hemoangola",
+                title: "Senha alterada com sucesso!",
                 icon: "success",
               });
               $('#messages').text("")
             }
           </script>
         {% endfor %}
+       
         <!-- copyright -->
         <p class="mt-5 mb-3 text-muted">© 2021 HemoAngola. Todos os direitos reservados</p>
-
+        
     </form>
+
+
 </body>
 </html>

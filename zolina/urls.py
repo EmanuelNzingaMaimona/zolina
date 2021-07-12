@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views  as auth_views
-from client.views import home, find, about, regist, v404, perfil, login_user, logout_user, FindListView
+from client.views import home, find, about, regist, v404, perfil, login_user, logout_user, FindListView, change_password
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +28,8 @@ urlpatterns = [
     path('find_donors/', FindListView.as_view(template_name='find.html'), name='url_find'),
     path('regist/', regist, name='url_regist'),
     path('404/', v404, name='url_v404'),
-    path('perfil/<str:pk>', perfil, name='url_perfil'),
+    path('perfil/', perfil, name='url_perfil'),
+    path('change_pwd/', change_password, name='url_password'),
     path('login/', login_user, name='url_login'),
     path('logout/', logout_user, name='url_logout'),
     path('reset_password/', auth_views.PasswordResetView.as_view(),name='password_reset'),

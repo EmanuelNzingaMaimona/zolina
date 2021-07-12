@@ -1,7 +1,9 @@
+import sweetify
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db import transaction
+from django.utils.translation import gettext as _
 from .forms import CreateUserForm, DonorForm
 from .models import Donor
 from .filters import DonorFilter
@@ -9,14 +11,23 @@ from .filters import DonorFilter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
 from django.views.generic import ListView
 
 from .models import fill_p
 
+
+
+# Filters
+
+
+def str_replace(text):
+    text.replace('username', 'Nome de usuario')
+    return text
+
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
+
 
 class FindListView(ListView):
     model = Donor
@@ -57,11 +68,12 @@ def regist(request):
                 group = request.POST.get('group'), 
                 province = request.POST.get('province'),
                 municipe = request.POST.get('municipe'), 
-                district = request.POST.get('district')
+                district = request.POST.get('district'),
+                email = insta.email,
             )
             obj.save()
             user = form.cleaned_data.get('username') 
-            messages.success(request, 'benvenue ' + user)
+            sweetify.success(request, 'Seja bem-vindo a comunidade, ' + user+'!')
             return redirect('url_login')
     
     content = {'form': form}
@@ -95,10 +107,10 @@ def login_user(request):
                 )
             if user is not None:
                 login(request, user)
-                messages.info(request, 'success')
+                messages.info(request,'aceite')
                 return redirect('url_home') 
             else:
-                messages.info(request, 'error')
+                messages.info(request, 'error_login')
     return render(request, 'login.html')
 
 def logout_user(request):
@@ -106,29 +118,27 @@ def logout_user(request):
     return redirect('url_login')
 
 
-def perfil(request, pk):
+def perfil(request):
     if not request.user.is_authenticated:
         return redirect('url_login')
     
-    insta = Donor.objects.get(user=User.objects.get(username=pk))
     user = request.user
+    insta = Donor.objects.get(user=User.objects.get(username=user.username))
+
     userform = CreateUserForm(instance=user)
     donorform = DonorForm(instance=insta)
     if request.method == "POST":
-        userform = CreateUserForm(request.POST or None, instance=user)
         donorform = DonorForm(request.POST or None, request.FILES or None, instance=insta)
         if donorform.is_valid:
             donorform.save()
-            pk=request.POST.get('username')
             messages.success(request, 'Sucessfully updated')
         else:
             messages.error(request, 'sth went wrong')
-    
+
     content = {
         'i': user,
         'user': userform, 
         'form': donorform,
-        'email': User.objects.get(username=pk).email,
         'municipe': insta.municipe,
         }
 
@@ -137,34 +147,19 @@ def perfil(request, pk):
 
 
 
-def nova_senha(request, pk):
+def change_password(request):
     if not request.user.is_authenticated:
         return redirect('url_login')
     
-    insta = Donor.objects.get(user=User.objects.get(username=pk))
     user = request.user
-    userform = CreateUserForm(instance=user)
-    donorform = DonorForm(instance=insta)
     if request.method == "POST":
-        userform = CreateUserForm(request.POST or None, instance=user)
-        donorform = DonorForm(request.POST or None, request.FILES or None, instance=insta)
-        if userform.is_valid and donorform.is_valid:
-            userform.save()
-            donorform.save()
-            pk=request.POST.get('username')
-            messages.success(request, 'Sucessfully updated')
-        else:
-            messages.error(request, 'sth went wrong')
+        pk=request.POST.get('password1')
+        user.set_password(pk)
+        user.save()
+        messages.success(request, 'senha')
+        return redirect('url_login') 
     
-    content = {
-        'i': user,
-        'user': userform, 
-        'form': donorform,
-        'email': User.objects.get(username=pk).email,
-        'municipe': insta.municipe,
-        }
-
-    return render(request, 'perfil.html', content)
+    return render(request, 'change_password.html')
 
 
 
