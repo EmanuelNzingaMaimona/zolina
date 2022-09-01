@@ -29,7 +29,7 @@ SECRET_KEY = 'ul33s4nt48#zro$-4f!#vg#urp)#bv)@xricq3xcw9lslc#dw6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','hemoangola']
 
 
 # Application definition
