@@ -20,7 +20,7 @@ E-mail: emanuelmaimona.com
 
 
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" media="all" />
 	    <!-- Style-CSS -->
     
     <!-- Font-Awesome-Icons-CSS -->
@@ -99,7 +99,7 @@ E-mail: emanuelmaimona.com
 
         {% for m in messages %}
           <p id="messages" class="esconde">{{m}}</p>
-           <script type="text/javascript">
+           <script>
             if($('#messages').text() === "error_login"){
               swal({
                 title: "Erro!",
