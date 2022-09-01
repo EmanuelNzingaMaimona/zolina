@@ -29,7 +29,7 @@ SECRET_KEY = 'ul33s4nt48#zro$-4f!#vg#urp)#bv)@xricq3xcw9lslc#dw6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','hemoangola']
+ALLOWED_HOSTS = ['hemoangola.herokuapp.com']
 
 
 # Application definition
@@ -79,10 +79,22 @@ WSGI_APPLICATION = 'hemoangola.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfq4avdufl5c6o',
+        'USER': 'wseregruiqtmag',
+        'PASSWORD': '5ed18bc771cdf7a5092a70adfacf06d0549c52f33ffd4edd791b81b46cc7a31f',
+        'HOST': 'ec2-44-206-11-200.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
