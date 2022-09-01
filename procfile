@@ -1,1 +1,1 @@
-web gunicorn hemoangola.wsgi:application --log-file -
+web gunicorn hemoangola.wsgi:apllication --log-file -
