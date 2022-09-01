@@ -29,7 +29,7 @@ SECRET_KEY = 'ul33s4nt48#zro$-4f!#vg#urp)#bv)@xricq3xcw9lslc#dw6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,9 +124,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# Configuration for heroku
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'),)
+django_heroku.settings(locals())
+
 
 MEDIA_URL = '/mymedia/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mymedia')
+
+
+
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
