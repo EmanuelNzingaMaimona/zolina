@@ -56,12 +56,12 @@ class DonorForm(forms.ModelForm):
         'placeholder': 'ex.: 1 de Maio', 'class':'form-control', 'name':'district'
     }))
     
-    picture = forms.CharField(required=True, widget=forms.FileInput(attrs={
-        'placeholder': 'alterar foto', 'class':'form-control', 'name':'picture'
-    }))
+    # picture = forms.CharField(required=True, widget=forms.FileInput(attrs={
+    #     'placeholder': 'alterar foto', 'class':'form-control', 'name':'picture'
+    # }))
 
 
     class Meta:
         model = Donor
-        fields = ('name', 'phone', 'email', 'group', 'province', 'municipe', 'district', 'picture')
+        fields = ('name', 'phone', 'email', 'group', 'province', 'municipe', 'district')
 

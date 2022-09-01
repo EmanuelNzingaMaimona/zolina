@@ -48,7 +48,7 @@ class Donor(models.Model):
     group = models.CharField(max_length=50, choices=GROUP_CHOICES, default="A+")
     province = models.CharField(max_length=50, choices=PROVINCE_CHOICES, default="Bengo")
     municipe = models.CharField(max_length=100)
-    picture = models.ImageField(blank=True, null=True)
+    #picture = models.ImageField(blank=True, null=True)
     email = models.EmailField(max_length=150, blank=True, null=True)
 
     def __str__(self):
