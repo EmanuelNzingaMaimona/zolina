@@ -1,1 +1,1 @@
-web: gunicorn wsgi:hemoangola
+web: gunicorn hemoangola.wsgi
